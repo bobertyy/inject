@@ -1,0 +1,59 @@
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Language server files
+.clangd
+
+# CMake files
+CMakeFiles
+CTestTestfile.cmake
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+compile_commands.json
+
+# Builds
+darwin_64
+inject-unit-tests
+inject.srctrl*
+program.ll
+program.s
+inject.zip
+build/
+
+# Mac files
+.DS_Store
+
+# CLion gen files
+.idea
+*.cbp
