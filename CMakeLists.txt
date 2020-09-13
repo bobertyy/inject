@@ -1,31 +1,26 @@
-project ( inject )
-cmake_minimum_required( VERSION 3.11 )
+cmake_minimum_required(VERSION 3.12...3.18)
 
-option( test "Build all tests" ON )
+project(
+  Inject
+  VERSION 0.1
+  DESCRIPTION "Very simply DI lib"
+  LANGUAGES CXX)
 
-set( CMAKE_CXX_STANDARD 17 )
-set( CMAKE_CXX_STANDARD_REQUIRED ON )
-set( CMAKE_CXX_EXTENSIONS OFF )
-set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
-include_directories( include )
+  set( CMAKE_CXX_STANDARD 17 )
+  set( CMAKE_CXX_STANDARD_REQUIRED ON )
+  set( CMAKE_CXX_EXTENSIONS OFF )
+  set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
 
-# Testing
-if ( test ) 
-  if ( APPLE ) 
-    add_definitions(-DGTEST_USE_OWN_TR1_TUPLE)
-    add_definitions(-D__GLIBCXX__)
-  endif ( APPLE )
+  set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-  include_directories( test/include )
-  add_subdirectory( ext/googletest )
+  include(CTest)
+endif()
 
-  enable_testing()
+add_subdirectory(src)
 
-  file ( GLOB TEST_SOURCES "test/*.cpp" "test/**/*.cpp" )
-
-  add_executable( inject-unit-tests ${TEST_SOURCES} )
-  target_link_libraries( inject-unit-tests gtest gtest_main )
-
-  add_test( * inject-unit-tests )
-endif ( test )
+if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)
+   AND BUILD_TESTING)
+  add_subdirectory(test)
+endif()
